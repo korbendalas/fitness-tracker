@@ -1,0 +1,27 @@
+$color-white:#FFFFFF;
+$color-light-green:#34C7A0;
+$color-dark-green:#00B6A3;
+$color-white-blur:rgba(255, 255, 255, 0.25);
+$color-white-dark-blur:rgba(255, 255, 255, 0.5);
+
+$color-light-gray:rgba(137, 134, 148, 1);
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; //1rem = 10px , 16px/10px = 62.5%
+}
+
+body {
+    // font-family: $font-primary;
+    // color: $color-font-primary;
+    // line-height: 1.6;
+    //background-color: $color-white;
+}
