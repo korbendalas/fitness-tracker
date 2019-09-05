@@ -10,12 +10,11 @@ const initialState = {
     thu: { date: [], totalDaySteps: 0 },
     fri: { date: [], totalDaySteps: 0 },
 }
-//function every_nth(arr, nth) { return arr.filter((e, i) => i % nth === nth - 1) };
+
 function numberWithCommas(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
 }
 function fetchData() {
-
     fetch("https://api.myjson.com/bins/1gwnal")
         .then(res => res.json())
         .then(data => {
@@ -31,16 +30,13 @@ function fetchData() {
             })
         }
         ).then(() => {
-
             console.log('initial state', initialState)
             // console.log('total steps', totalSteps)
             generateNav();
             createContent()
-
         })
 
 }
-
 function createElement(elType, elText, elClass) {
     let element = document.createElement(elType);
     let elementText = document.createTextNode(elText);
@@ -52,7 +48,6 @@ function createElement(elType, elText, elClass) {
     }
     return element;
 }
-
 function generateHead() {
     let div = createElement('div')
     let h2 = createElement('h2', 'Welcome')
@@ -62,6 +57,7 @@ function generateHead() {
     document.getElementById('header').appendChild(div);
 }
 
+
 function generateNav() {
     days.forEach((item, i) => {
         console.log('item', item)
@@ -70,15 +66,16 @@ function generateNav() {
         let date = createElement("p", item.toUpperCase());
         div.appendChild(day)
         div.appendChild(date)
+        div.addEventListener('click', function (e) {
+
+        })
         document.getElementById("nav").appendChild(div)
     })
 }
 
-
+//intro screen
 function createContent() {
-    let containerDiv = createElement("div");
-
-
+    let containerDiv = createElement("div", "", "content");
     function activity() {
         //activity div container
         let activity = createElement("div", "", 'activity');
@@ -89,7 +86,6 @@ function createContent() {
         let icon = createElement('i', 'timer', 'material-icons');
         stopwatch.appendChild(icon);
         headerDiv.appendChild(stopwatch);
-
 
         //activity header container
         let headers = createElement('div', "", 'activity__top__headers');
@@ -109,7 +105,6 @@ function createContent() {
         activity.appendChild(dataDiv);
         return activity;
     }
-
     function stepsAndCalories(iconName, iconClass, header1, header2, value) {
         let wrapper = createElement("div", "", 'wrapper');
         //top div icon + headers
@@ -136,38 +131,35 @@ function createContent() {
         wrapper.appendChild(headerDiv)
         wrapper.appendChild(dataDiv)
         return wrapper;
-
     }
     //add activity container
-
     function calculateCalories() {
         let caloriesBurned = Math.round(totalSteps * 0.05)
         return numberWithCommas(caloriesBurned);
 
     }
-
     function calculateActivity() {
         let timeSpentMinutes = (totalSteps * 0.5) / 60
         let hours = timeSpentMinutes / 60;
         let hoursFloor = Math.floor(hours);
         let minutes = Math.round((hours - hoursFloor) * 60);
         return `${hoursFloor}h ${minutes}min`;
+    }
+    containerDiv.appendChild(activity())
+    containerDiv.appendChild(stepsAndCalories('directions_run', 'material-icons', 'Steps', 'Total', numberWithCommas(totalSteps)));
+    containerDiv.appendChild(stepsAndCalories('whatshot', 'material-icons', 'Calories', 'Total burned', calculateCalories()));
+    document.getElementById('content').appendChild(containerDiv);
+}
+function generateScreen2() {
+    let wrapperDiv = createElement('div', '', 'screenTwoWrapper');
+
+    function circle() {
 
     }
 
-
-    containerDiv.appendChild(activity())
-
-    containerDiv.appendChild(stepsAndCalories('directions_run', 'material-icons', 'Steps', 'Total', numberWithCommas(totalSteps)));
-    containerDiv.appendChild(stepsAndCalories('whatshot', 'material-icons', 'Calories', 'Total burned', calculateCalories()));
-    containerDiv.classList.add('content');
-    document.getElementById('content').appendChild(containerDiv);
 }
 
-
 window.addEventListener("load", function () {
-
     generateHead()
-
     fetchData();
 });

@@ -1,3 +1,17 @@
+.active {
+  padding-top: .8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: red;
+  border-radius: 2.3rem;
+  width: 6rem;
+  height: 6rem;
+  color: #FFFFFF;
+  font-family: helveticaNeuMd;
+  font-size: 1.6rem;
+  cursor: pointer; }
+
 *,
 *::before,
 *::after {
@@ -50,8 +64,10 @@ header {
     height: 6rem;
     color: #FFFFFF;
     font-family: helveticaNeuMd;
-    font-size: 1.6rem; }
+    font-size: 1.6rem;
+    cursor: pointer; }
     .nav__day p {
+      cursor: pointer;
       opacity: .7; }
 
 .activity {

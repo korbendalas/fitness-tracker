@@ -6,6 +6,22 @@ $color-white-dark-blur:rgba(255, 255, 255, 0.5);
 
 $color-light-gray:rgba(137, 134, 148, 1);
 
+.active {
+    padding-top: .8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: red;
+    border-radius: 2.3rem;
+    width: 6rem;
+    height: 6rem;
+    color: $color-white;
+    font-family: helveticaNeuMd;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
 *,
 *::before,
 *::after {
