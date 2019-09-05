@@ -110,3 +110,52 @@ header {
         }
     }
 }
+
+.wrapper {
+    color: $color-white;
+    padding: 2rem;
+    // height: 18.4rem;
+    border-radius: 2.8rem;
+    background-color: $color-white-blur;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+
+    &__left {
+        display: flex;
+        align-items: center;
+
+        &__headers {
+            padding-left: 1.5rem;
+
+            h5 {
+                font-size: 2rem;
+                font-family: helveticaNeuLt;
+            }
+
+            p {
+                font-size: 1.6rem;
+                font-family: helveticaNeuMd;
+                opacity: .7;
+            }
+        }
+
+        &__icon {
+
+            border-radius: 100%;
+            background-color: $color-white-blur;
+            text-align: center;
+
+            i {
+                padding: 8px;
+
+            }
+        }
+    }
+
+    &__right {
+        font-family: helveticaNeuMd;
+        font-size: 2.8rem;
+    }
+}
