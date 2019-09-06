@@ -167,9 +167,6 @@ function generateHead(screen2) {
             });
         })
 
-
-
-
         // div for h2 and p 
         let h2P = createElement('div', '', 'screen2Header__headers')
         let h2 = createElement('h2', formatDay(screen2.date[0]))
