@@ -2,6 +2,7 @@
 let days = ['mon', 'tue', 'wed', 'thu', 'fri'];
 
 let totalSteps = 0;
+let loading = true;
 //Initial state
 const initialState = {
     mon: { date: [], totalDaySteps: 0 },
@@ -10,6 +11,12 @@ const initialState = {
     thu: { date: [], totalDaySteps: 0 },
     fri: { date: [], totalDaySteps: 0 },
 }
+
+function loader() {
+    let div = createElement('div', '', 'loader')
+    return div;
+}
+
 
 function numberWithCommas(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
@@ -51,11 +58,10 @@ function fetchData() {
             })
         }
         ).then(() => {
-
             generateNav();
-            createContent()
             generateHead();
-            // generateScreen2()
+            loading = false;
+            createContent()
         })
 
 }
@@ -76,7 +82,6 @@ function activeClass(e) {
     if (document.querySelector('nav__day.active') !== null) {
         document.querySelector('nav__day.active').classList.remove('active');
     }
-    // e.target.className = "active";
 
 }
 
@@ -199,8 +204,8 @@ function generateHead(screen2) {
 
 function generateNav() {
 
+
     days.forEach((item, i) => {
-        //console.log('item', item)
         let div = createElement("div", "", "nav__day");
         let day = createElement("p", initialState[item].date[2]);
         let date = createElement("p", item.toUpperCase());
@@ -219,18 +224,14 @@ function generateNav() {
             generateHead(initialState[item]);
 
         })
-        // day.addEventListener('click', (e) => {
-        //     e.stopPropagation();
-        // })
-        // date.addEventListener('click', (e) => {
-        //     e.stopPropagation();
-        // })
+
 
         document.getElementById("nav").appendChild(div)
     })
 }
 //intro screen
 function createContent() {
+
     document.getElementById('content').innerHTML = "";
     let containerDiv = createElement("div", "", "content");
     function activity() {
@@ -302,7 +303,6 @@ function createContent() {
 
 }
 function generateScreen2(screen2Data) {
-    console.log('screen 2 data', screen2Data)
     let wrapperDiv = createElement('div', '', 'screenTwoWrapper');
 
     function circle() {
@@ -355,9 +355,6 @@ function generateScreen2(screen2Data) {
     wrapperDiv.appendChild(bottomData(calculateDistance(screen2Data.totalDaySteps), calculateCalories(screen2Data.totalDaySteps), calculateActivity(screen2Data.totalDaySteps, true)))
     document.getElementById('content').appendChild(wrapperDiv);
 }
-
-
-
 
 
 window.addEventListener("load", function () {
