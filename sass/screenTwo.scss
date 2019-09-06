@@ -107,3 +107,37 @@
         border-right: 2px solid $color-light-gray-blur;
     }
 }
+
+.screen2Header {
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    // background-color: $color-white-blur;
+
+    &__arrow {
+
+        padding: 0 2rem !important;
+
+        i {
+            font-size: 4rem;
+            color: $color-white;
+            cursor: pointer;
+        }
+    }
+
+    &__headers {
+        padding: 0 !important;
+        color: $color-white;
+
+        h2 {
+            color: $color-white;
+        }
+
+        p {
+            color: $color-white;
+            opacity: .7;
+        }
+    }
+}

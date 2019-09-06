@@ -223,3 +223,24 @@ header {
   .bottomData__callories {
     border-left: 2px solid rgba(137, 134, 148, 0.2);
     border-right: 2px solid rgba(137, 134, 148, 0.2); }
+
+.screen2Header {
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%; }
+  .screen2Header__arrow {
+    padding: 0 2rem !important; }
+    .screen2Header__arrow i {
+      font-size: 4rem;
+      color: #FFFFFF;
+      cursor: pointer; }
+  .screen2Header__headers {
+    padding: 0 !important;
+    color: #FFFFFF; }
+    .screen2Header__headers h2 {
+      color: #FFFFFF; }
+    .screen2Header__headers p {
+      color: #FFFFFF;
+      opacity: .7; }
