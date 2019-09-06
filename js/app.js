@@ -47,14 +47,14 @@ function fetchData() {
                 totalSteps += item.steps //total steps count
                 initialState[currentDay].date = b;
                 initialState[currentDay].totalDaySteps += item.steps
-                console.log(b)
+
             })
         }
         ).then(() => {
-            console.log('initial state', initialState)
-            // console.log('total steps', totalSteps)
+
             generateNav();
             createContent()
+            generateHead();
             // generateScreen2()
         })
 
@@ -71,36 +71,120 @@ function createElement(elType, elText, elClass) {
     return element;
 }
 
+function activeClass(e) {
+
+    if (document.querySelector('nav__day.active') !== null) {
+        document.querySelector('nav__day.active').classList.remove('active');
+    }
+    // e.target.className = "active";
+
+}
 
 
 function generateHead(screen2) {
+    function formatDay(day) {
+        switch (day) {
+            case 'Mon':
+                return 'Monday';
+                break;
+            case 'Tue':
+                return 'Tuesday';
+                break;
+            case 'Wed':
+                return 'Wednesday';
+                break;
+            case 'Thu':
+                return 'Thursday';
+                break;
+            case 'Fri':
+                return 'Friday';
+                break;
+            default:
+                return 'Weekend'
+        }
+    }
 
+    function formatMonth(month) {
+        switch (month) {
+            case 'Jan':
+                return 'January ';
+                break;
+            case 'Feb':
+                return 'February';
+                break;
+            case 'Mar':
+                return 'March';
+                break;
+            case 'Apr':
+                return 'April';
+                break;
+            case 'May':
+                return 'May';
+                break;
+            case 'Jun':
+                return 'June';
+                break;
+            case 'Jul':
+                return 'July';
+                break;
+            case 'Aug':
+                return 'August';
+                break;
+            case 'Sep':
+                return 'Sep';
+                break;
+            case 'Oct':
+                return 'October';
+                break;
+            case 'Nov':
+                return 'November';
+                break;
+            case 'Dec':
+                return 'December';
+                break;
+            default:
+                return 'Month'
+        }
+    }
 
-    if (screen2 === true) { //scren 2
-        document.getElementById('header').innerHTML = "";
+    if (screen2) { //scren 2
+        let header = document.getElementById('header');
+        header.innerHTML = "";
 
         let div = createElement('div', '', 'screen2Header'); //wrapper
         //icon wrapper div 
         let icon = createElement("div", '', 'screen2Header__arrow');
         let iconElement = createElement('i', 'chevron_left', 'material-icons');
         icon.appendChild(iconElement);
+        icon.addEventListener('click', () => {
+            createContent();
+            generateHead()
+
+            //to remove class active!
+            let elems = document.querySelectorAll(".active");
+            [].forEach.call(elems, function (el) {
+                el.classList.remove("active");
+            });
+        })
+
+
+
 
         // div for h2 and p 
         let h2P = createElement('div', '', 'screen2Header__headers')
-        let h2 = createElement('h2', 'Tuesday')
-        let p = createElement("p", 'June 21. 2019');
+        let h2 = createElement('h2', formatDay(screen2.date[0]))
+        let p = createElement("p", `${formatMonth(screen2.date[1])} ${screen2.date[2]}. ${screen2.date[3]}`);
         h2P.appendChild(h2);
         h2P.appendChild(p);
 
         div.appendChild(icon);
         div.appendChild(h2P);
 
-        let header = document.getElementById('header');
         header.appendChild(div);
         // header.style.justifyContent = 'center'
         header.style.backgroundColor = 'rgba(255, 255, 255, 0.25)'
 
-    } else {
+    } else {//first screen
         document.getElementById('header').innerHTML = "";
         let div = createElement('div')
         let h2 = createElement('h2', 'Welcome')
@@ -108,13 +192,16 @@ function generateHead(screen2) {
         div.appendChild(h2);
         div.appendChild(p);
         document.getElementById('header').appendChild(div);
+        header.appendChild(div);
+        // header.style.justifyContent = 'center'
+        header.style.backgroundColor = '#FFFFFF'
     }
     //if screen2 than generate for screen2
 
 }
 
-
 function generateNav() {
+
     days.forEach((item, i) => {
         //console.log('item', item)
         let div = createElement("div", "", "nav__day");
@@ -123,17 +210,31 @@ function generateNav() {
         div.appendChild(day)
         div.appendChild(date)
         div.addEventListener('click', function (e) {
-            // console.log(initialState[item])
+
+            let elems = document.querySelectorAll(".active");
+            [].forEach.call(elems, function (el) {
+                el.classList.remove("active");
+            });
+            div.classList.add('active')
+
             document.getElementById('content').innerHTML = "";
             generateScreen2(initialState[item]);
-            generateHead(true)
+            generateHead(initialState[item]);
 
         })
+        // day.addEventListener('click', (e) => {
+        //     e.stopPropagation();
+        // })
+        // date.addEventListener('click', (e) => {
+        //     e.stopPropagation();
+        // })
+
         document.getElementById("nav").appendChild(div)
     })
 }
 //intro screen
 function createContent() {
+    document.getElementById('content').innerHTML = "";
     let containerDiv = createElement("div", "", "content");
     function activity() {
         //activity div container
@@ -200,6 +301,8 @@ function createContent() {
     containerDiv.appendChild(stepsAndCalories('directions_run', 'material-icons', 'Steps', 'Total', numberWithCommas(totalSteps)));
     containerDiv.appendChild(stepsAndCalories('whatshot', 'material-icons', 'Calories', 'Total burned', calculateCalories(totalSteps)));
     document.getElementById('content').appendChild(containerDiv);
+
+
 }
 function generateScreen2(screen2Data) {
     console.log('screen 2 data', screen2Data)
@@ -211,7 +314,7 @@ function generateScreen2(screen2Data) {
         let icon = createElement("div", '', 'circle__inner__icon');
         let iconElement = createElement('i', 'directions_run', 'material-icons');
         let stepsText = createElement('p', 'Steps');
-        let h1Steps = createElement('h1', screen2Data.totalDaySteps)
+        let h1Steps = createElement('h1', numberWithCommas(screen2Data.totalDaySteps))
 
         icon.appendChild(iconElement);
         innerCircle.appendChild(icon);
