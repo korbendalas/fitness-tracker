@@ -33,7 +33,8 @@ function fetchData() {
             console.log('initial state', initialState)
             // console.log('total steps', totalSteps)
             generateNav();
-            createContent()
+            // createContent()
+            generateScreen2()
         })
 
 }
@@ -72,7 +73,6 @@ function generateNav() {
         document.getElementById("nav").appendChild(div)
     })
 }
-
 //intro screen
 function createContent() {
     let containerDiv = createElement("div", "", "content");
@@ -154,10 +154,59 @@ function generateScreen2() {
     let wrapperDiv = createElement('div', '', 'screenTwoWrapper');
 
     function circle() {
+        let circle = createElement("div", "", 'circle');
+        let innerCircle = createElement("div", "", 'circle__inner');
+        let icon = createElement("div", '', 'circle__inner__icon');
+        let iconElement = createElement('i', 'directions_run', 'material-icons');
+        let stepsText = createElement('p', 'Steps');
+        let h1Steps = createElement('h1', '7542')
 
+        icon.appendChild(iconElement);
+        innerCircle.appendChild(icon);
+        innerCircle.appendChild(stepsText);
+        innerCircle.appendChild(h1Steps)
+        circle.appendChild(innerCircle);
+        return circle;
     }
 
+    function motivational() {
+        let motivational = createElement('div', '', 'motivational');
+        let veryGood = createElement('p', 'Very good')
+        let keepGoing = createElement('h1', 'Keep going!')
+        motivational.appendChild(veryGood);
+        motivational.appendChild(keepGoing);
+        return motivational;
+    }
+
+
+    function bottomData(km, cal, hours) {
+        let bottomDataDiv = createElement('div', '', 'bottomData');
+
+        function dailyData(headName, dataValue, divClassName) {
+
+            let div = createElement('div', '', divClassName);
+            let Head = createElement('p', headName)
+            let Data = createElement('h1', dataValue);
+            div.appendChild(Head);
+            div.appendChild(Data);
+            return div;
+        }
+
+        bottomDataDiv.appendChild(dailyData('km', 5, 'bottomData__kilometers'));
+        bottomDataDiv.appendChild(dailyData('cal', 550, 'bottomData__callories'));
+        bottomDataDiv.appendChild(dailyData('hours', 3, 'bottomData__hours'));
+        return bottomDataDiv;
+    }
+
+    wrapperDiv.appendChild(circle());
+    wrapperDiv.appendChild(motivational())
+    wrapperDiv.appendChild(bottomData(4, 550))
+    document.getElementById('content').appendChild(wrapperDiv);
 }
+
+
+
+
 
 window.addEventListener("load", function () {
     generateHead()

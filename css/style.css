@@ -148,3 +148,78 @@ header {
 @font-face {
   font-family: helveticaNeuLt;
   src: url("../fonts/HelveticaNeueLt.ttf"); }
+
+.screenTwoWrapper {
+  padding-top: 2rem;
+  border-radius: 2.8rem;
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 100vh; }
+
+.circle {
+  margin: 2rem auto;
+  height: 25rem;
+  width: 25rem;
+  border-radius: 100%;
+  border: 1rem #00B6A3 solid;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; }
+  .circle__inner {
+    width: 70%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around; }
+    .circle__inner__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 100%;
+      background-color: rgba(52, 199, 160, 0.2);
+      text-align: center;
+      margin: 2rem 0 1rem 0; }
+      .circle__inner__icon i {
+        color: #FFFFFF;
+        padding: 8px; }
+    .circle__inner P {
+      font-size: 2rem;
+      font-family: helveticaNeuLt;
+      margin-bottom: 1rem; }
+    .circle__inner h1 {
+      font-size: 4.8rem;
+      font-family: helveticaNeuMd; }
+
+.motivational {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 4rem; }
+  .motivational p {
+    font-family: helveticaNeuLt; }
+  .motivational h1 {
+    font-size: 4rem;
+    font-family: helveticaNeuMd; }
+
+.bottomData {
+  margin-top: 15rem;
+  display: flex;
+  justify-content: space-around; }
+  .bottomData__kilometers, .bottomData__callories, .bottomData__hours {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 3rem; }
+    .bottomData__kilometers p, .bottomData__callories p, .bottomData__hours p {
+      font-family: helveticaNeuMd;
+      font-size: 1.8rem;
+      color: rgba(137, 134, 148, 0.5); }
+    .bottomData__kilometers h1, .bottomData__callories h1, .bottomData__hours h1 {
+      font-size: 4rem;
+      font-family: helveticaNeuMd;
+      color: #00B6A3; }
+  .bottomData__callories {
+    border-left: 2px solid rgba(137, 134, 148, 0.2);
+    border-right: 2px solid rgba(137, 134, 148, 0.2); }
