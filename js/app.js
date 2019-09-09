@@ -32,6 +32,9 @@ function calculateDistance(steps) {
     let distance = (steps * 0.762) * 0.001
     return distance.toFixed(1)
 }
+function calculateAverageKm() {
+    return calculateDistance(totalSteps) / 5
+}
 
 function calculateActivity(steps, screen2) {
     let timeSpentMinutes = (steps * 0.5) / 60
@@ -42,6 +45,8 @@ function calculateActivity(steps, screen2) {
     return screen2 ? hours.toFixed(1) : `${hoursFloor}h ${minutes}min`
 
 }
+
+
 function fetchData() {
     fetch("https://api.myjson.com/bins/1gwnal")
         .then(res => res.json())
@@ -58,9 +63,10 @@ function fetchData() {
             })
         }
         ).then(() => {
+
             generateNav();
             generateHead();
-            loading = false;
+            // loading = false;
             createContent()
         })
 
@@ -298,6 +304,7 @@ function createContent() {
     containerDiv.appendChild(activity())
     containerDiv.appendChild(stepsAndCalories('directions_run', 'material-icons', 'Steps', 'Total', numberWithCommas(totalSteps)));
     containerDiv.appendChild(stepsAndCalories('whatshot', 'material-icons', 'Calories', 'Total burned', calculateCalories(totalSteps)));
+    containerDiv.appendChild(stepsAndCalories('transfer_within_a_station', 'material-icons', 'Average', 'Distance in km', calculateAverageKm()));
     document.getElementById('content').appendChild(containerDiv);
 
 
@@ -358,6 +365,7 @@ function generateScreen2(screen2Data) {
 
 
 window.addEventListener("load", function () {
-    generateHead(false)
+
+    document.getElementById('content').appendChild(loader())//spinner
     fetchData();
 });
